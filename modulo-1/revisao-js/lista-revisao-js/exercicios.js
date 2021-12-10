@@ -190,11 +190,22 @@ function retornaArrayOrdenadoAlfabeticamente(consultas) {
         }
     }
     return consultacomp;
-  
+   
 }
 
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
+    for (let consulta of consultas)
+
+        consulta.dataDaConsulta = consulta.dataDaConsulta.split('/').reverse().toString().replaceAll(',', '');
+
+    consultas.sort(function (a, b) {
+        return (a.dataDaConsulta > b.dataDaConsulta) ? 1 : ((b.dataDaConsulta > a.dataDaConsulta) ? -1 : 0);
+    })
+
+    for (var i in consultas)
+        consultas[i].dataDaConsulta = consultas[i].dataDaConsulta.replace(/^(\d{4})(\d{2})(\d{2}).*/, '$3/$2/$1');
    
-}
+    return consultas
+} 
